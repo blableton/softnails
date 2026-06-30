@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SoftNails">
+  <meta name="theme-color" content="#0d0618">
+  <meta name="description" content="SoftNails – rejestracja wizyt klientek">
+  <title>SoftNails – Rejestracja wizyty</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Tło animowane -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- Nagłówek -->
+    <header class="app-header">
+      <div class="logo" aria-hidden="true">💅</div>
+      <h1>SoftNails</h1>
+      <p class="subtitle">Panel rejestracji wizyt</p>
+    </header>
+
+    <!-- Aktualna data -->
+    <div class="date-badge" id="dateBadge" role="status" aria-live="polite">
+      <span class="date-icon" aria-hidden="true">📅</span>
+      <span id="currentDate">Ładowanie...</span>
+    </div>
+
+    <!-- Formularz -->
+    <form id="visitForm" class="visit-form" novalidate>
+
+      <div class="form-group">
+        <label for="nazwaIG">Nazwa IG</label>
+        <div class="input-wrapper" id="nazwaIG-wrapper">
+          <span class="input-prefix" aria-hidden="true">@</span>
+          <input
+            type="text"
+            id="nazwaIG"
+            name="nazwaIG"
+            placeholder="nazwa_konta"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="none"
+            spellcheck="false"
+            inputmode="text"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="kwota">Kwota</label>
+        <div class="input-wrapper" id="kwota-wrapper">
+          <input
+            type="number"
+            id="kwota"
+            name="kwota"
+            placeholder="0"
+            inputmode="numeric"
+            min="0"
+            step="1"
+          >
+          <span class="input-suffix" aria-label="PLN">PLN</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="platnosc">Metoda płatności</label>
+        <div class="select-wrapper" id="platnosc-wrapper">
+          <select id="platnosc" name="platnosc">
+            <option value="" disabled selected>Wybierz metodę...</option>
+            <option value="Karta">💳 Karta</option>
+            <option value="Gotówka">💵 Gotówka</option>
+          </select>
+          <span class="select-arrow" aria-hidden="true">▼</span>
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn" class="submit-btn">
+        <span class="btn-text">Zapisz wizytę</span>
+        <span class="btn-icon" aria-hidden="true">→</span>
+      </button>
+
+    </form>
+
+    <!-- Licznik zapisanych dzisiaj -->
+    <div class="stats-bar">
+      <span class="stats-icon" aria-hidden="true">✨</span>
+      <span>Dzisiaj zapisano: <strong id="todayCount">0</strong> wizyt</span>
+    </div>
+
+  </div>
+
+  <!-- Powiadomienie -->
+  <div id="notification" class="notification hidden" role="alert" aria-live="assertive"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
