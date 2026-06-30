@@ -99,25 +99,12 @@ async function sendToSheets(nazwaIG, kwota, platnosc) {
   const params = new URLSearchParams({ nazwaIG, kwota, platnosc });
   const url    = `${SCRIPT_URL}?${params.toString()}`;
 
-  const response = await fetch(url, {
-    method:   'GET',
-    redirect: 'follow',
+  // mode: 'no-cors' omija blokadę CORS między GitHub Pages a Apps Script.
+  // Żądanie trafia do arkusza, ale odpowiedzi nie można odczytać – to normalne.
+  await fetch(url, {
+    method: 'GET',
+    mode:   'no-cors',
   });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
-  }
-
-  // Spróbuj odczytać odpowiedź (nieobowiązkowe)
-  try {
-    const text = await response.text();
-    if (text.includes('"status":"error"')) {
-      const json = JSON.parse(text);
-      throw new Error(json.message || 'Błąd skryptu');
-    }
-  } catch (_) {
-    // Jeśli nie można odczytać odpowiedzi – i tak OK
-  }
 }
 
 
